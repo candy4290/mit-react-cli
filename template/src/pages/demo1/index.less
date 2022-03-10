@@ -1,0 +1,38 @@
+@import '~@styles/_variables.less'; // 用于覆盖上面定义的变量
+.page-content {
+  padding: 16px;
+  .content {
+    padding: 8px 8px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    > * {
+      margin-right: 8px;
+      margin-bottom: 12px;
+    }
+  }
+  .site-button-ghost-wrapper {
+    padding: 26px 16px 16px;
+    background: rgb(190, 200, 200);
+    > * {
+      margin-right: 8px;
+    }
+  }
+  .site-dropdown-context-menu {
+    color: #777;
+    background: #bec8c8;
+  }
+  .demo-loadmore-list {
+    width: 100%;
+    min-height: 350px;
+  }
+  .code-box-demo .demo {
+    overflow: auto;
+  }
+  .code-box-demo .ant-popover-wrap > a {
+    margin-right: 8px;
+  }
+  .code-box-demo .ant-btn {
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+}

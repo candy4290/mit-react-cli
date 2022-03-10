@@ -1,0 +1,139 @@
+/* 设置text 颜色、字体、大小、字重、行高 */
+.setFont(@color, @font-family, @size, @font-weight, @line-height) {
+    color: @color;
+    font-family: @font-family;
+    font-size: @size;
+    font-weight: @font-weight;
+    line-height: @line-height;
+}
+
+/* 元素底部下滑线 距离底部距离、高度、背景、是否包含动画效果 */
+.bottemLine(@bottom, @height, @background, @hasAnimation: false) when (@hasAnimation =false) {
+    position: relative;
+
+    &::after {
+        position: absolute;
+        content: '';
+        bottom: @bottom;
+        left: 0px;
+        right: 0px;
+        height: @height;
+        background: @background;
+    }
+}
+
+.bottemLine(@bottom, @height, @background, @hasAnimation: false) when (@hasAnimation =true) {
+    position: relative;
+
+    &::after {
+        position: absolute;
+        content: '';
+        bottom: @bottom;
+        left: 0px;
+        right: 0px;
+        height: @height;
+        background: @background;
+        animation: line ease-in-out 0.5s;
+    }
+}
+
+/* 底部下划线动画效果 */
+@keyframes line {
+    0% {
+        left: calc(50% - 1px);
+        right: calc(50% + 1px);
+    }
+
+    100% {
+        left: 0px;
+        right: 0px;
+    }
+}
+
+/* 文字不可选中 */
+.cannotBeSelected {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* input placeholder样式更改 */
+.changePlaceholder(@color, @fontSize) {
+    ::-webkit-input-placeholder {
+        /* WebKit, Blink, Edge */
+        color: @color  !important;
+        font-size: @fontSize;
+    }
+
+    :-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: @color  !important;
+        font-size: @fontSize;
+        opacity: 1;
+    }
+
+    ::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: @color  !important;
+        font-size: @fontSize;
+        opacity: 1;
+    }
+
+    :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: @color  !important;
+        font-size: @fontSize;
+    }
+
+    ::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: @color  !important;
+        font-size: @fontSize;
+    }
+}
+
+/* flex布局 */
+.flex(@alignItems, @justifyContent) {
+    display: flex;
+    align-items: @alignItems;
+    justify-content: @justifyContent;
+}
+
+/* 文字多行展示，超出... */
+.ellipsisRows(@rows) {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: @rows;
+    line-clamp: @rows;
+    -webkit-box-orient: vertical;
+}
+
+/* 画三角形 */
+.triangle(@length, @color) {
+    width: 0;
+    height: 0;
+    border: @length solid;
+    border-color: transparent transparent @color;
+}
+
+/* 自定义滚动条样式 */
+.kz-scrollbar() {
+    &::-webkit-scrollbar-track {
+        // box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: rgba(0, 0, 0, 0);
+        width: 6px;
+    }
+    /* 滚动条的滑轨背景颜色 */
+    &::-webkit-scrollbar {
+        width: 6px;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 21, 41, 0.2);
+        border-radius: 3px;
+    }
+}
