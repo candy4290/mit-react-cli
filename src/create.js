@@ -1,6 +1,7 @@
 const fs = require('fs')
 const utils = require('../utils/index')
 const npm = require('./install')
+const git = require('./init')
 
 /* 三变量判断异步操作 */
 let fileCount = 0  /* 文件数量 */
@@ -8,6 +9,7 @@ let dirCount = 0   /* 文件夹数量 */
 let flat = 0       /* readir数量 */
 let isInstall = false
 let targetPath;
+const path = require('path');
 
 module.exports = function(res){
     /* 创建文件 */
@@ -75,13 +77,32 @@ function dirExist(sourcePath,currentPath,copyCallback,cb){
 function completeControl(cb){
     if(fileCount === 0 && dirCount ===0 && flat===0){
         utils.green('------构建完成-------')
+        const gitignoreExists = fs.existsSync(path.join(targetPath, '.gitignore'));
+        if (gitignoreExists) {
+            // Append if there's already a `.gitignore` file there
+            const data = fs.readFileSync(path.join(targetPath, 'gitignore'));
+            fs.appendFileSync(path.join(targetPath, '.gitignore'), data);
+            fs.unlinkSync(path.join(targetPath, 'gitignore'));
+        } else {
+            // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
+            // See: https://github.com/npm/npm/issues/1862
+            fs.renameSync(
+                path.join(targetPath, 'gitignore'),
+                path.join(targetPath, '.gitignore'),
+            );
+        }
         if(cb && !isInstall ){
-            isInstall = true
-            utils.blue('-----开始install-----')
-            cb(()=>{
-                utils.blue('-----完成install-----')
-                // /* 判断是否存在webpack  */
-                // runProject()
+            const gitInit = git([ 'init' ], targetPath);
+            utils.blue('-----开始git init-----')
+            gitInit(() => {
+                utils.blue('-----完成git init-----')
+                isInstall = true
+                utils.blue('-----开始install-----')
+                cb(()=>{
+                    utils.blue('-----完成install-----')
+                    // /* 判断是否存在webpack  */
+                    // runProject()
+                }, targetPath)
             }, targetPath)
         }
     }
@@ -100,10 +121,11 @@ function revisePackageJson(res,sourcePath, targetPath){
     return new Promise((resolve)=>{
         fs.readFile(sourcePath+'/package.json',(err,data)=>{
             if(err) throw err
-            const { author , name  } = res
+            const { author , name, version  } = res
             let json = data.toString()
             json = json.replace(/demoName/g,name.trim())
             json = json.replace(/demoAuthor/g,author.trim())
+            json = json.replace(/demoVersion/g,version.trim())
             const path = targetPath + '/package.json'
             fs.writeFile(path, new Buffer(json) ,()=>{
                 utils.green( '创建文件：'+ path )
