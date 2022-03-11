@@ -1,6 +1,6 @@
 {
-  "name": "mit-react-cli1",
-  "version": "1.0.5",
+  "name": "mit-react-cli",
+  "version": "1.0.1",
   "description": "mit前端react项目创建脚手架",
   "main": "src/index.js",
   "bin": {
