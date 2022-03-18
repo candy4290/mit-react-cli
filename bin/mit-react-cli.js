@@ -12,7 +12,7 @@ program
 .command('create')
 .description('创建项目')
 .action(function(){
-	green(`欢迎使用mit-react-cli ${pjson.version},轻松构建react ts项目～`)
+	green(`欢迎使用mit-react-cli ${pjson.version},轻松构建react ts/js项目～`)
 	inquirer.create().then(res=>{
         if(res){
             create( res )

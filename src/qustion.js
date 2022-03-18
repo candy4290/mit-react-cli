@@ -26,6 +26,12 @@ const create = [
         name:'version',
         message:'请输入版本？',
         default: '0.1.0'
+    },{
+        type: 'list',
+        name: 'templateVersion',
+        message: '请选择ts/js',
+        choices: ['js', 'ts'],
+        default: 1
     }
 ]
 module.exports = {

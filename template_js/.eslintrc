@@ -1,0 +1,39 @@
+{
+  "env": {
+    "node": true,
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+  ],
+
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "react-hooks", ],
+  "rules": {
+    // "no-console": ["warn", { "allow": ["info", "error"] }],
+    "no-extra-boolean-cast": "off" /* 不必要的boolean转换 */,
+    "no-unused-vars": ["error"] /* 未使用的声明 */,
+    "no-const-assign": ["error"] /* const声明的常量不可以再次被赋值 */,
+    "eqeqeq": 1 /* == 与 != 的使用情况 */,
+
+    /* https://github.com/yannickcr/eslint-plugin-react#recommended */
+    "react/prop-types": 0,
+    "react/display-name": 0,
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+
+    "array-callback-return": "error",
+
+    "react-hooks/rules-of-hooks": "error" /* 检查 Hook 的规则 */,
+    "react-hooks/exhaustive-deps": "warn" /* 检查 effect 的依赖 */
+  }
+}

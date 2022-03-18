@@ -1,0 +1,100 @@
+@import '~nprogress/nprogress.css';
+@import '~@styles/_variables.less'; // 引入antd样式及覆盖变量
+/* 通用样式 */
+@import './styles/_shared.less';
+
+:root {
+  /* 定制自己的主题色，需要修改时，改变它的值 */
+  --mit-primary-color: #13a4a0;
+}
+/* 覆盖浏览器默认样式（user agent stylesheet） */
+:focus {
+  outline-width: 0 !important;
+}
+/* css reset start*/
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: rgba(250, 250, 250, 0.996078431372549);
+  font-family: '苹方-简 中黑体', 'PingFangSC-Regular;', 'Arial', 'Microsoft YaHei', '黑体', '宋体',
+    sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  font-size: 100%;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+  font-style: normal;
+  font-weight: normal;
+}
+a {
+  text-decoration: none;
+}
+.clearfix:after {
+  content: '.';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  *zoom: 1;
+} /*公共类*/
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.al {
+  text-align: left;
+}
+.ac {
+  text-align: center;
+}
+.ar {
+  text-align: right;
+}
+.hide {
+  display: none;
+}
