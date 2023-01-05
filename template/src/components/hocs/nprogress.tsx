@@ -1,27 +1,38 @@
 import { useEffect } from 'react';
 import NProgress from 'nprogress';
-import { RouterConfigType } from '@/types';
+import { useTitle } from 'ahooks';
+import { getGlobalAbort } from '@src/configs/axios';
 
-/**
- * 页面加载进度条，无效手动包裹，auth-router会帮你自动包裹
- *
- * @param {() => JSX.Element} WrappedComponent
- * @return {*}
- */
-const nprogressHoc = (WrappedComponent: () => JSX.Element) => {
-  return function (props2: RouterConfigType) {
-    useEffect(() => {
-      NProgress.done();
-      return () => {
-        NProgress.configure({ showSpinner: false });
-        NProgress.start();
-      };
-    }, [props2]);
-    return (
-      <>
-        <WrappedComponent {...(props2 as any)} />
-      </>
-    );
-  };
+/* 顶部页面加载进度条 */
+function useNprogress() {
+  useEffect(() => {
+    NProgress.done();
+    return () => {
+      NProgress.configure({ showSpinner: false });
+      NProgress.start();
+    };
+  }, []);
+}
+
+/* 路由变化时-取消所有异步请求~ */
+function useAbortXHR() {
+  useEffect(() => {
+    getGlobalAbort().abort();
+  }, []);
+}
+
+/* 高阶组件-
+  1.自动设置标题
+  2.顶部页面加载进度条
+*/
+const nprogressHoc = (WrappedComponent: any) => (props: any) => {
+  useTitle('嘉定勤务-' + props.title);
+  useNprogress();
+  useAbortXHR();
+  return (
+    <>
+      <WrappedComponent {...props} />
+    </>
+  );
 };
 export default nprogressHoc;

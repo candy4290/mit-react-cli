@@ -1,13 +1,15 @@
 .check-browser-modal {
-  .ant-modal-content,
-  .custom-default-modal-content,
-  .custom-dark-modal-content {
-    background: transparent;
-    box-shadow: none;
-  }
-  .ant-modal-body,
-  .custom-default-modal-body,
-  .custom-dark-modal-body {
-    padding: 0;
-  }
+    .ant-modal {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .ant-modal-content {
+        background: transparent;
+        box-shadow: none;
+    }
+    .ant-modal-body {
+        padding: 0;
+    }
 }

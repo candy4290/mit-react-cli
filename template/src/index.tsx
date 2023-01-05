@@ -1,20 +1,64 @@
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.less';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import 'moment/locale/zh-cn';
+import * as serviceWorker from './serviceWorker';
+import zhCN from 'antd/locale/zh_CN';
+import { ConfigProvider } from 'antd';
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
 
-ReactDOM.render(
-  <React.StrictMode>
+const disableReactDevTools = () => {
+  const noop = () => undefined;
+  const DEV_TOOLS = (window as any).__REACT_DEVTOOLS_GLOBAL_HOOK__;
+
+  if (typeof DEV_TOOLS === 'object') {
+    for (const [key, value] of Object.entries(DEV_TOOLS)) {
+      DEV_TOOLS[key] = typeof value === 'function' ? noop : [];
+    }
+  }
+};
+
+process.env.NODE_ENV === 'production' &&
+  disableReactDevTools(); /* 生产环境禁用react developer tools */
+
+dayjs.locale('zh-cn');
+
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+root.render(
+  <ConfigProvider locale={zhCN}>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </ConfigProvider>
 );
+/* 取消应用加载动画 */
+function preloaderFinished() {
+  const body = document.querySelector('body');
+  const preloader = document.querySelector('.preloader');
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  body!.style.overflow = 'hidden';
+  function remove() {
+    if (!preloader) {
+      return;
+    }
+    preloader.className += ' preloader-hidden-add preloader-hidden-add-active';
+    // preloader.addEventListener('transitionend', () => {
+    //   console.log('transitionend')
+    //   preloader.className = 'preloader-hidden';
+    // });
+    const t$ = setTimeout(() => {
+      preloader.className = 'preloader-hidden';
+      clearTimeout(t$);
+    }, 100);
+  }
+  const t$ = setTimeout(() => {
+    remove();
+    body!.style.overflow = '';
+    clearTimeout(t$);
+  }, 100);
+}
+
+preloaderFinished();
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

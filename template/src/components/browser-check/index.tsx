@@ -17,18 +17,18 @@ export default function BrowserCheck() {
     if (chromeIndex > -1) {
       /* 获取chrome版本 */
       const endIndex = userAgent.indexOf('.', chromeIndex);
-      const version = userAgent.slice(chromeIndex + 7, endIndex);
+      const version = +userAgent.slice(chromeIndex + 7, endIndex);
       console.log('chrome:' + version);
-      if (+version < 70) {
+      if (version < 70) {
         setImgSrc(LowerVersionImg);
         setVisible(true);
       }
     } else if (firefoxIndex > -1) {
       /* 获取firefox版本 */
       const endIndex = userAgent.indexOf('.', firefoxIndex);
-      const version = userAgent.slice(firefoxIndex + 8, endIndex);
+      const version = +userAgent.slice(firefoxIndex + 8, endIndex);
       console.log('firefox:' + version);
-      if (+version < 70) {
+      if (version < 70) {
         setImgSrc(LowerVersionImg);
         setVisible(true);
       }
@@ -45,8 +45,7 @@ export default function BrowserCheck() {
 
   return (
     <Modal
-      centered={true}
-      visible={visible}
+      open={visible}
       footer={null}
       closable={false}
       width={628}
