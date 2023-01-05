@@ -1,0 +1,16 @@
+{
+  "path-intellisense.autoSlashAfterDirectory": false,
+  "path-intellisense.mappings": {
+    "@src": "${workspaceRoot}/src",
+    "@pages": "${workspaceRoot}/src/pages",
+    "@components": "${workspaceRoot}/src/components",
+    "@ajax": "${workspaceRoot}/src/configs/axios",
+    "@apis": "${workspaceRoot}/src/configs/apis",
+    "@assets": "${workspaceRoot}/src/assets",
+    "@imgs": "${workspaceRoot}/src/assets/images",
+    "@utils": "${workspaceRoot}/src/utils",
+    "@configs": "${workspaceRoot}/src/configs",
+    "@styles": "${workspaceRoot}/src/styles",
+    "@redux": "${workspaceRoot}/src/redux"
+  }
+}

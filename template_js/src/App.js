@@ -1,33 +1,23 @@
-import { createBrowserHistory } from 'history';
-import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
-import { ConfigProvider } from 'antd';
-import zhCN from 'antd/lib/locale/zh_CN';
-import { Provider } from 'react-redux';
-import store from './stores';
-
 import './App.less';
-import AuthRouter from './components/auth-router';
-import routerConfig from './configs/router.config';
+import { createRouter } from './configs/router.config';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from '@redux';
+import '@babel/polyfill';
+import BrowserCheck from '@components/browser-check';
 import { useVersion } from './self-hooks';
-import BrowserCheck from './components/browser-check';
 
-export const history = createBrowserHistory();
-
-const App = () => {
+function App() {
+  const routes = createBrowserRouter(createRouter());
   useVersion();
+
   return (
     <Provider store={store}>
-        <ConfigProvider locale={zhCN}>
-          <div className={`App`}>
-            <HistoryRouter history={history}>
-              <AuthRouter routerConfig={routerConfig} />
-            </HistoryRouter>
-          </div>
-          {/* 检查适用的浏览器版本及型号 */}
-          <BrowserCheck></BrowserCheck>
-        </ConfigProvider>
+      {routes && <RouterProvider router={routes} />}
+      {/* 检查适用的浏览器版本及型号 */}
+      <BrowserCheck></BrowserCheck>
     </Provider>
   );
-};
+}
 
 export default App;

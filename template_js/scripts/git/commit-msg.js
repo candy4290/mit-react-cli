@@ -7,9 +7,8 @@
 const fs = require('fs');
 const checkMsg = require('./validate-commit-message');
 const msgFile = process.env['HUSKY_GIT_PARAMS'];
-
 let isValid = true;
-if (msgFile || true) {
+if (msgFile) {
   const commitMsg = fs.readFileSync(msgFile, { encoding: 'utf-8' });
   const firstLine = commitMsg.split('\n')[0];
   isValid = checkMsg(firstLine);

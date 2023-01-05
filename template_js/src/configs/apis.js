@@ -1,7 +1,4 @@
-const apis = {
-  testUrl: '/qinwu-api/schedual/policeSchedulingAnalysis/schedulingAnalysisTable',
-
+export default {
   /* 字典接口 */
-  getAllDictionaryUrl: '/qinwu-api/schedual/dict/list',
+  getAllDictionaryUrl: '/jiadingqinwu-api/schedual/dict/list',
 };
-export default apis;

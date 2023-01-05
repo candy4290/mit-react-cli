@@ -1,0 +1,51 @@
+@prefix: wc-not-found;
+.@{prefix} {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  &-img {
+    flex: 0 0 62.5%;
+    width: 62.5%;
+    padding-right: 152px;
+    zoom: 1;
+    &::before {
+      display: table;
+      content: " ";
+    }
+    &::after {
+      clear: both;
+      height: 0;
+      font-size: 0;
+      visibility: hidden;
+    }
+    &-cont {
+      float: right;
+      width: 100%;
+      max-width: 430px;
+      height: 360px;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      background-size: 100% 100%;
+      background-image: url("~@imgs/exception/404.svg");
+    }
+  }
+  &-cont {
+    flex: auto;
+    &-title {
+      margin-bottom: 24px;
+      color: rgba(255,255,255, 0.65);;
+      font-weight: 600;
+      font-size: 72px;
+      line-height: 72px;
+    }
+    &-desc {
+      margin-bottom: 16px;
+      color: rgba(255,255,255, 0.45);
+      font-size: 20px;
+      line-height: 28px;
+    }
+    // &-actions {
+
+    // }
+  }
+}

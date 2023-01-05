@@ -1,5 +1,5 @@
 {
-  "maxLength": 200,
+  "maxLength": 100,
   "types": [
     "build",
     "ci",
