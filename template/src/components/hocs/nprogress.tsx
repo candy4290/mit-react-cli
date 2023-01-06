@@ -26,7 +26,7 @@ function useAbortXHR() {
   2.顶部页面加载进度条
 */
 const nprogressHoc = (WrappedComponent: any) => (props: any) => {
-  useTitle('嘉定勤务-' + props.title);
+  useTitle('xxxx-' + props.title);
   useNprogress();
   useAbortXHR();
   return (

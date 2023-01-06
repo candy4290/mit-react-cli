@@ -23,9 +23,9 @@ version.json中版本号增大 npm run version
 
 ### 使用nprogress0.2.0进行路由导航进度显示提醒
 
-### 使用ahooks 3.1.10
+### 使用ahooks 3.7.0
 
-### axios0.26.0进行ajax请求 qs6.10.3进行序列号操作
+### axios1.1.3进行ajax请求 qs6.10.3进行序列号操作
 
 ### 使用http-proxy-middleware 2.0.3进行代理配置解决跨域问题
 

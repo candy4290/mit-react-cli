@@ -1,7 +1,7 @@
-import { useDebounce, useSafeState } from 'ahooks';
+import { useDebounce, useSafeState, useUpdateEffect } from 'ahooks';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { useUpdateEffect } from 'ahooks';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * 获取版本号，localstorage保存新版本号，及之前的版本号
@@ -10,7 +10,7 @@ import axios from 'axios';
  */
 export function useVersion() {
   useEffect(() => {
-    axios.get('/version.json').then(res => {
+    axios.get('/version.json').then((res: any) => {
       if (!localStorage.getItem('Version')) {
         /* 存储版本号 */
         localStorage.setItem('Version', res.version);
@@ -20,7 +20,7 @@ export function useVersion() {
       }
     });
     const temp$ = setInterval(() => {
-      axios.get('/version.json', { withoutSignal: true }).then(res => {
+      axios.get('/version.json', { withoutSignal: true } as any).then((res: any) => {
         if (!localStorage.getItem('Version')) {
           /* 存储版本号 */
           localStorage.setItem('Version', res.version);
@@ -48,8 +48,8 @@ export function useVersion() {
  * @return {*}
  */
 export function usePagination(
-  fn,
-  options = {},
+  fn: any,
+  options: any = {},
   defaultConfig = {
     pageSize: 'pageSize',
     pageIndex: 'pageIndex',
@@ -70,7 +70,7 @@ export function usePagination(
   const f = useCallback(fn, []);
 
   const doReset = useCallback(
-    temp => {
+    (temp: any) => {
       /* 重置查询条件,将查询条件变为初始化查询条件 */
       setParams({
         ...options.params,
@@ -83,9 +83,9 @@ export function usePagination(
   );
 
   const doRequery = useCallback(
-    temp => {
+    (temp: any) => {
       /* 保持查询条件不变-触发再次查询 */
-      setParams(p => ({ ...p, ...temp }));
+      setParams((p: any) => ({ ...p, ...temp }));
     },
     [setParams]
   );
@@ -93,7 +93,7 @@ export function usePagination(
   useManualEffect(() => {
     setLoading(true);
     f(params).then(
-      rsp => {
+      (rsp: any) => {
         setLoading(false);
         setData(rsp);
       },
@@ -110,7 +110,7 @@ export function usePagination(
       pageSize: params[defaultConfig.pageSize] || 10,
       pageIndex: params[defaultConfig.pageIndex] || 1,
       params,
-      paramsChange: args => {
+      paramsChange: (args: any) => {
         /* 入参变化，会重置pageIndex,从第一页开始查询 */
         setParams({
           ...options?.params,
@@ -119,15 +119,15 @@ export function usePagination(
           [defaultConfig.pageIndex]: options.defaultPageIndex || 1,
         });
       },
-      pageSizeChange: pageSize => {
-        setParams(p => ({ ...p, [defaultConfig.pageSize]: pageSize }));
+      pageSizeChange: (pageSize: any) => {
+        setParams((p: any) => ({ ...p, [defaultConfig.pageSize]: pageSize }));
       },
-      pageIndexChange: pageIndex => {
-        setParams(p => ({ ...p, [defaultConfig.pageIndex]: pageIndex }));
+      pageIndexChange: (pageIndex: any) => {
+        setParams((p: any) => ({ ...p, [defaultConfig.pageIndex]: pageIndex }));
       },
-      onchange: (page, pageSize) => {
+      onchange: (page: any, pageSize: any) => {
         /* pageIndex及pageSize发生改变 */
-        setParams(p => ({
+        setParams((p: any) => ({
           ...p,
           [defaultConfig.pageIndex]: page,
           [defaultConfig.pageSize]: pageSize,
@@ -140,10 +140,10 @@ export function usePagination(
 }
 
 /* 导出文件 */
-export function useExportFile({ methodType, url }) {
+export function useExportFile({ methodType, url }: any) {
   const [exportLoading, setExportLoading] = useSafeState(false);
   const doExport = useCallback(
-    (params, defaultFileName) => {
+    (params: any, defaultFileName: any) => {
       if (exportLoading) return;
       let promise;
       if (methodType === 'get') {
@@ -198,7 +198,7 @@ export function useInputChange() {
   const [keywords, setKeywords] = useSafeState('');
   const debounceKeywords = useDebounce(keywords, { wait: 500 });
   const onChange = useCallback(
-    e => {
+    (e: any) => {
       if (e.type === 'compositionstart') {
         lock.current = true;
         return;
@@ -214,4 +214,23 @@ export function useInputChange() {
     [setKeywords]
   );
   return { keywords: debounceKeywords, onChange };
+}
+
+export function useNotAuthorized() {
+  const navigate = useNavigate();
+  const onNotAuthorized = useCallback(
+    (event: any) => {
+      if (event.data === 'NotAuthorized') {
+        navigate('/login');
+      }
+    },
+    [navigate]
+  );
+
+  useEffect(() => {
+    window.addEventListener('message', onNotAuthorized);
+    return () => {
+      window.removeEventListener('message', onNotAuthorized);
+    };
+  }, [onNotAuthorized]);
 }

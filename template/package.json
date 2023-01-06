@@ -1,6 +1,9 @@
 {
-  "name": "jiadingqinwu",
-  "version": "0.1.0",
+  "name": "demoName",
+  "author": {
+    "name": "demoAuthor"
+  },
+  "version": "demoVersion",
   "private": true,
   "dependencies": {
     "@babel/polyfill": "^7.12.1",

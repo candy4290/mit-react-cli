@@ -1,7 +1,7 @@
-import { useDebounce, useSafeState } from 'ahooks';
+import { useDebounce, useSafeState, useUpdateEffect } from 'ahooks';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { useUpdateEffect } from 'ahooks';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * 获取版本号，localstorage保存新版本号，及之前的版本号
@@ -214,4 +214,23 @@ export function useInputChange() {
     [setKeywords]
   );
   return { keywords: debounceKeywords, onChange };
+}
+
+export function useNotAuthorized() {
+  const navigate = useNavigate();
+  const onNotAuthorized = useCallback(
+    event => {
+      if (event.data === 'NotAuthorized') {
+        navigate('/login');
+      }
+    },
+    [navigate]
+  );
+
+  useEffect(() => {
+    window.addEventListener('message', onNotAuthorized);
+    return () => {
+      window.removeEventListener('message', onNotAuthorized);
+    };
+  }, [onNotAuthorized]);
 }
