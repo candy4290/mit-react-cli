@@ -8,7 +8,9 @@ import BrowserCheck from '@components/browser-check';
 import { useVersion } from './self-hooks';
 
 function App() {
-  const routes = createBrowserRouter(createRouter() as any);
+  const routes = createBrowserRouter(createRouter() as any, , {
+    basename: process.env.PUBLIC_URL,
+  });
   useVersion();
 
   return (

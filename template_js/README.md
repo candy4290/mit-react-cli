@@ -5,10 +5,16 @@
 图片压缩 npm run compressImg
 version.json中版本号增大 npm run version
 
-### 启动 npm run start 或者 npm run start:prod
-
-### 打包 npm run build 或者 npm run build:prod
-
+如果项目不是部署在根目录。比如需要访问http://xxxx:yyy/admin/来访问项目
+则需要做如下几个步骤：
+1..env或者.env.production中的PUBLIC_URL值修改为/admin
+2.nginx配置
+    location /admin {
+        root D:/git/jiadingqinwu;
+        try_files $uri $uri/admin /admin/index.html;
+        index index.html;
+    }
+3.将打包后文件夹的名字改为admin
 ### 上线前记得将version.json中的版本号数值调大[路由跳转时，自动刷新页面，访问新版本]
 
 ### 使用react 18.2.0

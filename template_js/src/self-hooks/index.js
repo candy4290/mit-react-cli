@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
  */
 export function useVersion() {
   useEffect(() => {
-    axios.get('/version.json').then(res => {
+    axios.get(process.env.PUBLIC_URL + '/version.json').then(res => {
       if (!localStorage.getItem('Version')) {
         /* 存储版本号 */
         localStorage.setItem('Version', res.version);
@@ -20,7 +20,7 @@ export function useVersion() {
       }
     });
     const temp$ = setInterval(() => {
-      axios.get('/version.json', { withoutSignal: true }).then(res => {
+      axios.get(process.env.PUBLIC_URL + '/version.json', { withoutSignal: true }).then(res => {
         if (!localStorage.getItem('Version')) {
           /* 存储版本号 */
           localStorage.setItem('Version', res.version);
