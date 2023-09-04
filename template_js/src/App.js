@@ -3,7 +3,6 @@ import { createRouter } from './configs/router.config';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '@redux';
-import '@babel/polyfill';
 import BrowserCheck from '@components/browser-check';
 import { useVersion } from './self-hooks';
 

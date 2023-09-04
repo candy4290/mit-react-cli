@@ -1,22 +1,23 @@
 {
-  "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
-    "paths": {
-      "@src/*": ["src/*"],
-      "@pages/*": ["src/pages/*"],
-      "@components/*": ["src/components/*"],
-      "@ajax/*": ["src/configs/axios/*"],
-      "@apis/*": ["src/configs/apis/*"],
-      "@assets/*": ["src/assets/*"],
-      "@imgs/*": ["src/assets/images/*"],
-      "@utils/*": ["src/utils/*"],
-      "@configs/*": ["src/configs/*"],
-      "@styles/*": ["src/styles/*"],
-      "@redux/*": ["src/redux/*"]
-    }
-  },
-  "exclude": ["node_modules"]
-}
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "commonjs",
+      "allowSyntheticDefaultImports": true,
+      "baseUrl": "./",
+      "paths": {
+        "@src/*": ["src/*"],
+        "@pages/*": ["src/pages/*"],
+        "@components/*": ["src/components/*"],
+        "@ajax/*": ["src/configs/axios/*"],
+        "@apis/*": ["src/configs/apis/*"],
+        "@assets/*": ["src/assets/*"],
+        "@imgs/*": ["src/assets/images/*"],
+        "@utils/*": ["src/utils/*"],
+        "@configs/*": ["src/configs/*"],
+        "@styles/*": ["src/styles/*"],
+        "@redux/*": ["src/redux/*"]
+      }
+    },
+    "exclude": ["node_modules"]
+  }
+  

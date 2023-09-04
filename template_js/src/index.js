@@ -1,3 +1,6 @@
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+export * from 'core-js/es/array/at'; // https://github.com/facebook/create-react-app/issues/13118
 import ReactDOM from 'react-dom/client';
 import './index.less';
 import App from './App';
