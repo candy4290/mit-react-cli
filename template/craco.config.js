@@ -13,7 +13,20 @@ const pathResolve = pathUrl => path.join(__dirname, pathUrl);
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 // const smp = new SpeedMeasurePlugin();
 
+const outputDir = 'build'; /* 打包后文件夹名称 */
+const port = 3000;
 module.exports = {
+  devServer: {
+    port: port,
+    client: false, // https://github.com/dilanx/craco/issues/501
+    proxy: {
+      // 内部也是使用的http-proxy-middleware
+      '/jiadingqinwu-api': {
+        target: 'http://172.20.62.117:47070',
+        pathRewrite: { '^/jiadingqinwu-api': '' },
+      },
+    },
+  },
   plugins: [
     {
       plugin: CracoLessPlugin,
@@ -66,7 +79,8 @@ module.exports = {
       //   []
       // ),
     ],
-    configure: webpackConfig => {
+    configure: (webpackConfig, { env, paths }) => {
+      paths.appBuild = webpackConfig.output.path = path.resolve(__dirname, outputDir);
       webpackConfig.plugins.forEach(i => {
         if (i.key === 'ESLintWebpackPlugin') {
           i.options.emitError = process.env.NODE_ENV === 'production' ? false : false;

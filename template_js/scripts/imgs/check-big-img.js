@@ -14,11 +14,6 @@ function compressLoop(filePath) {
         const filedir = path.join(filePath, fileName);
         fs.stat(filedir, (err2, stats) => {
           if (!err2) {
-            const targeturl = targetDir + filedir.slice(filedir.indexOf('images') + 7);
-            const targetDirt = targeturl.slice(0, -fileName.length - 1);
-            if (!fs.existsSync(targetDirt)) {
-              fs.mkdirSync(targetDirt);
-            }
             const isFile = stats.isFile();
             const isDir = stats.isDirectory();
             if (isFile) {
