@@ -131,12 +131,12 @@ export function transformSeconds(nums: any) {
     if (nums < 60) {
       return nums + '秒';
     } else {
-      const mins = parseInt((nums / 60) + '');
+      const mins = parseInt(nums / 60 + '');
       if (mins < 60) {
         const seconds = nums % 60;
         return mins + '分' + seconds + '秒';
       } else {
-        const hours = parseInt((mins / 60) + '');
+        const hours = parseInt(mins / 60 + '');
         const seconds = nums % 60;
         return hours + '时' + mins + '分' + seconds + '秒';
       }

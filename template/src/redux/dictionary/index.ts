@@ -3,9 +3,9 @@ import { RootState } from '..';
 import { getDictionaryInfo } from '@src/configs/fetch-apis';
 
 const initDictionary: {
-  data: DictionaryState | null,
-  errMsg: string | null,
-  isLoading: boolean
+  data: DictionaryState | null;
+  errMsg: string | null;
+  isLoading: boolean;
 } = {
   data: null,
   errMsg: null,
@@ -14,15 +14,15 @@ const initDictionary: {
 
 interface DictionaryState {
   [key: string]: {
-    [key: number]: string
-  }
+    [key: number]: string;
+  };
 }
 
 export const getDictionary = createAsyncThunk('dictionary/fetch', async () => {
   const response = await getDictionaryInfo();
   const result: DictionaryState = {};
   (response || []).forEach(item => {
-    const element: {[key: string]: string} = {};
+    const element: { [key: string]: string } = {};
     element[item.dict_value] = item.dict_label;
     result[item.dict_type] = Object.assign({}, result[item.dict_type], element);
   });
@@ -49,5 +49,5 @@ export const getDictionarySlice = createSlice({
 });
 
 export const dictionarySelector = (state: RootState) => state.dictionary.data;
- 
+
 export default getDictionarySlice.reducer;

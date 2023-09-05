@@ -5,7 +5,7 @@ const tinify = require('tinify');
 tinify.key = ''; /* 填写有效key https://tinypng.com/developers */
 
 if (!tinify.key) {
-  throw Error('请填写有效的tinypng的key')
+  throw Error('请填写有效的tinypng的key');
 }
 
 const pathResolve = pathUrl => path.join(__dirname, pathUrl);

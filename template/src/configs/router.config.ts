@@ -14,13 +14,13 @@ import { Outlet } from 'react-router-dom';
   children-子路由
 */
 interface PathItem {
-  path: string,
-  url: string,
-  title?: string,
-  auth?: boolean,
-  isEmpty?: boolean,
-  index?: boolean,
-  children?: PathItem[]
+  path: string;
+  url: string;
+  title?: string;
+  auth?: boolean;
+  isEmpty?: boolean;
+  index?: boolean;
+  children?: PathItem[];
 }
 
 const routerConfig: PathItem[] = [

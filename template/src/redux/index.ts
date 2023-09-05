@@ -1,4 +1,4 @@
-import dictionaryReducer, { getDictionary } from './dictionary';
+import dictionaryReducer from './dictionary';
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 

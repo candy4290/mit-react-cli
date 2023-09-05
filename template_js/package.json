@@ -25,11 +25,12 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.4.4",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "redux": "^4.2.0"
   },
   "homepage": "/",
   "scripts": {
+    "prepare": "husky install",
     "reinstall": "rd /s/ q node_modules && npm install",
     "start": "dotenv -e .env craco start",
     "start:prod": "dotenv -e .env.production craco start",
@@ -44,7 +45,8 @@
     "compressImgs": "cd ./scripts/imgs && node compress-tinypng.js",
     "compressImgSingle": "cd ./scripts/imgs && node compress-single.js",
     "checkLargeImg": "cd ./scripts/imgs && node check-big-img.js",
-    "version": "cd ./scripts/version && node index.js"
+    "version": "cd ./scripts/version && node index.js",
+    "preCommit": "pretty-quick --staged && lint-staged"
   },
   "eslintConfig": {
     "extends": "react-app"

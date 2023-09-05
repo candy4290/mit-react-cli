@@ -9,7 +9,7 @@ export default function Page1() {
   const dictionary = useAppSelector(dictionarySelector);
 
   useEffect(() => {
-    console.log('----------')
+    console.log('----------');
     /* 触发action */
     dispatch(getDictionary());
   }, [dispatch]);

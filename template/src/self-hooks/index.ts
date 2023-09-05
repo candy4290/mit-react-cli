@@ -20,15 +20,17 @@ export function useVersion() {
       }
     });
     const temp$ = setInterval(() => {
-      axios.get(process.env.PUBLIC_URL + '/version.json', { withoutSignal: true } as any).then((res: any) => {
-        if (!localStorage.getItem('Version')) {
-          /* 存储版本号 */
-          localStorage.setItem('Version', res.version);
-        } else {
-          /* 存储最新版本号 */
-          localStorage.setItem('LastVersion', res.version);
-        }
-      });
+      axios
+        .get(process.env.PUBLIC_URL + '/version.json', { withoutSignal: true } as any)
+        .then((res: any) => {
+          if (!localStorage.getItem('Version')) {
+            /* 存储版本号 */
+            localStorage.setItem('Version', res.version);
+          } else {
+            /* 存储最新版本号 */
+            localStorage.setItem('LastVersion', res.version);
+          }
+        });
     }, 60 * 1000);
     return () => {
       clearInterval(temp$);

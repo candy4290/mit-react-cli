@@ -30,8 +30,8 @@ axios.interceptors.request.use(
       config.paramsSerializer = {
         serialize: params => {
           return qs.stringify(params, { arrayFormat: 'repeat' });
-        }
-      }
+        },
+      };
     }
     if (
       // !(

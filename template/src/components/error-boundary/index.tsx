@@ -25,7 +25,7 @@ class ErrorBoundary extends React.Component {
   static getDerivedStateFromError(error: any) {
     console.log('getDerivedStateFromError');
     // 更新 state 使下一次渲染能够显示降级后的 UI
-    return { hasError: true, error, url: location.pathname };
+    return { hasError: true, error, url: window.location.pathname };
   }
 
   componentDidCatch(error: any, errorInfo: any) {
@@ -52,7 +52,7 @@ class ErrorBoundary extends React.Component {
   }
 
   shouldComponentUpdate() {
-    if (this.state.hasError && location.pathname !== this.state.url) {
+    if (this.state.hasError && window.location.pathname !== this.state.url) {
       this.setState({
         hasError: false,
       });
