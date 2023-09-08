@@ -16,7 +16,7 @@ module.exports = function(res){
     utils.green('------开始构建-------')
     const sourcePath = __dirname.slice(0,-3)+ (res.templateVersion === 'ts' ? 'template' : 'template_js')
     utils.blue('当前路径:'+ process.cwd())
-    const target = process.cwd() + '\\' + res.name;
+    const target = process.cwd() + '/' + res.name;
     targetPath = target;
     fs.mkdir(target, () => {
         revisePackageJson( res ,sourcePath, target).then(()=>{
